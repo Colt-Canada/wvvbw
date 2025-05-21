@@ -1,0 +1,27 @@
+name: Comment on Pull Request
+
+on:
+  workflow_dispatch:
+
+jobs:
+  push-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Make changes
+        run: |
+          git config --global user.email "panjasouptik968.com"
+          git config --global user.name "Souptik Panja"
+
+          echo "New changes" >> Change.txt
+          git add Change.txt
+          git commit -m "Add changes"
+
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          git push origin SEROTONIN
