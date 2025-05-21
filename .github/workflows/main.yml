@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+      deploy:
+        description: 'Deploy the application'
+        required: true
+        default: 'false'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run a one line script
+        run: echo "Hello, World!"
+
+      - name: Print environment
+        run: echo "Deploying to ${{ github.event.inputs.environment }} environment"
